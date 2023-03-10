@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Portfolio.Models.ProjectModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+@foreach (var item in Model)
+{
+        <div class="card" style="width: 18rem;">
+            <img decoding="async" src="@("~/image/"+item.ImageName)" asp-append-version="true" />        
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title))</h5>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                <a href="#" class="btn btn-primary">Se projekt</a>
+            </div>
+        </div>
+}
+

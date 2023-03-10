@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using static Portfolio.Controllers.FileModelsController;
 
 namespace Portfolio.Models
 {
@@ -7,11 +9,16 @@ namespace Portfolio.Models
     {
         //Properties
         public int ID { get; set; }
+        [DisplayName("Titel")]
+        [Required(ErrorMessage = "Vänligen ange titel")]
         public string? Title { get; set; }
+        [DisplayName("Filnamn")]
         public string? FileName { get; set; }
 
         [NotMapped]
-        [DisplayName("Upload File")]
+        [Required(ErrorMessage = "Vänligen välj en fil")]
+        [DisplayName("Ladda upp fil")]
+        [AllowedExtensions(new string[] { ".pdf" })]
         public IFormFile File { get; set; }
     }
 }
