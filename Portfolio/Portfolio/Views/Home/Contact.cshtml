@@ -1,0 +1,78 @@
+﻿@model ContactModel
+@{
+    ViewData["Title"] = "Kontakt";
+}
+<!-- Breadcrumbs -->
+<partial name="_BreadcrumbsPartial" />
+
+<!-- Contact -->
+<section id="contact" class="contact">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Kontakta mig</h2>
+            <p>Kontakta mig genom formuläret eller genom kontaktuppgifterna nedan.</p>
+        </div>
+
+        <div class="row" data-aos="fade-in">
+
+            <div class="col-lg-5 d-flex align-items-stretch">
+                <div class="info">
+                    <div class="address">
+                        <i class="bi bi-geo-alt"></i>
+                        <h4>Plats:</h4>
+                        <p>Naturstensvägen 59, Uppsala</p>
+                    </div>
+
+                    <div class="email">
+                        <i class="bi bi-envelope"></i>
+                        <h4>E-post:</h4>
+                        <p>beab2100@student.miun.se</p>
+                    </div>
+
+                    <div class="phone">
+                        <i class="bi bi-phone"></i>
+                        <h4>Telefon:</h4>
+                        <p>070 691 97 83</p>
+                    </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2004.054541070123!2d17.550753315926485!3d59.84823438184338!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465fcb0d98aee629%3A0x35968a45a9b31311!2sNaturstensv%C3%A4gen%2059%2C%20752%2068%20Uppsala!5e0!3m2!1ssv!2sse!4v1678823567762!5m2!1ssv!2sse" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+            </div>
+
+            
+
+            <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                <form asp-action="Contact" role="form" class="email-form">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                        <label asp-for="@Model.Name"></label>
+                        <input type="text" asp-for="@Model.Name" class="form-control" placeholder="Skriv ditt namn">
+                        <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                    </div>
+                        <div class="form-group col-md-6">
+                        <label asp-for="@Model.Email"></label>
+                        <input type="text" asp-for="@Model.Email" class="form-control" placeholder="Skriv din e-post">
+                        <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Subject"></label>
+                        <input type="text" asp-for="@Model.Subject" class="form-control" placeholder="Skriv ditt ämne">
+                        <span class="text-danger" asp-validation-for="@Model.Subject"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@Model.Message"></label>
+                        <textarea class="form-control" asp-for="@Model.Message" placeholder="Skriv ditt meddelande"></textarea>
+                        <span class="text-danger" asp-validation-for="@Model.Message"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Skicka</button>
+                    <br />
+                    <p class="form-message">@ViewBag.Message</p>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>

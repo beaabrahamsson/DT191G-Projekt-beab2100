@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "Projekt detaljer";
+    ViewData["Action"] = "ProjectDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Breadcrumbs -->
+<partial name="_BreadcrumbsPartial" />
+
+<!-- Project Details -->
+<section id="portfolio-details" class="portfolio-details">
+    <div class="container">
+
+        <div class="row gy-4">
+
+            <div class="col-lg-8">
+                <div class="portfolio-details-slider swiper">
+                    <div class="swiper-wrapper align-items-center">
+
+                        <div class="swiper-slide">
+                            <img decoding="async" src="@("~/image/"+Model.ImageName)" asp-append-version="true" alt="Projektbild för @ViewBag.ProjectDetails.Title">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="portfolio-description">
+                    <h2>Om projektet</h2>
+                    <p>
+                        @ViewBag.ProjectDetails.Description
+                    </p>
+                </div>
+                <a href='@ViewBag.ProjectDetails.Link' class="btn btn-secondary my-2" download><i class="bi bi-link"></i> Länk till projekt</a>
+                <a href='@ViewBag.ProjectDetails.GitHub' class="btn btn-secondary my-2" download><i class="bi bi-github"></i> Länk till GitHub </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>

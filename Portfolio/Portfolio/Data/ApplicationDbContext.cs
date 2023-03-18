@@ -11,8 +11,8 @@ namespace Portfolio.Data
         {
         }
         public DbSet<ProjectModel> Projects { get; set; }
-        public DbSet<CVModel> CV { get; set; }
-        public DbSet<CoursesModel> Courses { get; set; }
+        public DbSet<ResumeModel> CV { get; set; }
+        public DbSet<EducationModel> Education { get; set; }
         public DbSet<FileModel> Files { get; set; }
     }
 }

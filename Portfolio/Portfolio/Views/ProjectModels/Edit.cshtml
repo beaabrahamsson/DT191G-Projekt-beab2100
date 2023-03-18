@@ -1,13 +1,13 @@
 ﻿@model Portfolio.Models.ProjectModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Ändra";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Ändra</h1>
 
-<h4>ProjectModel</h4>
+<h4>Projekt</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -40,23 +40,20 @@
                 <span asp-validation-for="Image" class="text-danger"></span>
             </div>
             <dt class="col-sm-2">
-            Uploaded Image
+            <p>Uppladdad bild</p>
         </dt>
         <dd class="col-sm-10">
-                <img decoding="async" src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="250px" height="200px" />
-        </dd>
-        <dd class="col-sm-10">
-            <a href='~/image/IMG230950137.webp' download>Download File From Folder</a>
+                <img decoding="async" src="@("~/image/"+Model.ImageName)" asp-append-version="true" width="350px" height="200px" alt="Projektbild" />
         </dd>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Spara" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tillbaka till listan</a>
 </div>
 
 @section Scripts {

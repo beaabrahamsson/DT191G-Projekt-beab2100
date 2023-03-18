@@ -1,0 +1,24 @@
+﻿
+@foreach (var item in ViewBag.Resume)
+{
+    <div class="resume-item">
+        <h4>@item.JobTitle</h4>
+        <h5>
+            @item.YearStart - @if (@item.IsOngoing == false)
+            {
+                @item.YearEnd
+            }
+            else
+            {
+                <text>
+                    Pågående
+                </text>
+            }
+        </h5>
+
+        <p><em>@item.Company</em></p>
+        <p>
+            @item.Description
+        </p>
+    </div>
+}

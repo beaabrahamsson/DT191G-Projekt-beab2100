@@ -1,20 +1,22 @@
-﻿@model IEnumerable<Portfolio.Models.ProjectModel>
-
-@{
-    ViewData["Title"] = "Index";
-}
-
-
-
-@foreach (var item in Model)
+﻿
+@foreach (var item in ViewBag.Projects)
 {
-        <div class="card" style="width: 18rem;">
-            <img decoding="async" src="@("~/image/"+item.ImageName)" asp-append-version="true" />        
+    
+    <div class="col-md-4">
+        <a asp-action="ProjectDetails" asp-route-id="@item.ID" class="card-link">
+        <div class="card mb-4 box-shadow">
+            <img class="card-img-top" decoding="async" src="@("~/image/"+item.ImageName)" asp-append-version="true" alt="Projekt bild">
             <div class="card-body">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title))</h5>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-                <a href="#" class="btn btn-primary">Se projekt</a>
+                <h5 class="card-title">@item.Title</h5>
+                <p class="card-text">@Html.Raw(item.Description.Substring(0, item.Description.Length > 100 ? 100 : item.Description.Length))...</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted"></small>
+                </div>
             </div>
         </div>
+        </a>
+    </div>
+    
+ 
 }
 

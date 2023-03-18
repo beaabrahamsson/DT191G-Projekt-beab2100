@@ -1,0 +1,9 @@
+﻿@foreach (var item in ViewBag.Edu)
+{
+    <div class="resume-item">
+        <h4>@item.Title, @item.Credits hp</h4>
+        <h5>@item.YearStart - @item.YearEnd</h5>
+        <p><em>@item.School</em></p>
+        <p>@item.Description</p>
+    </div>
+}

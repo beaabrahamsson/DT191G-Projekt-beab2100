@@ -19,6 +19,6 @@ namespace Portfolio.Models
         [Required(ErrorMessage = "Vänligen välj en fil")]
         [DisplayName("Ladda upp fil")]
         [AllowedExtensions(new string[] { ".pdf" })]
-        public IFormFile File { get; set; }
+        public IFormFile? File { get; set; }
     }
 }

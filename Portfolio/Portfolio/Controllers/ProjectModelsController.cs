@@ -14,9 +14,14 @@ using System.Drawing;
 using Microsoft.AspNetCore.Routing.Constraints;
 using System.IO;
 using System.Drawing.Drawing2D;
+using System.Net;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Build.Construction;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Portfolio.Controllers
 {
+    [Authorize]
     public class ProjectModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -32,9 +37,19 @@ namespace Portfolio.Controllers
         // GET: ProjectModels
         public async Task<IActionResult> Index()
         {
-            return _context.Projects != null ?
-                        View(await _context.Projects.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.Projects'  is null.");
+
+            if (_context.Projects != null)
+            {
+                var projects = await _context.Projects.ToListAsync();
+                ViewBag.Projects = projects;
+                return View(projects);
+            } else
+            {
+                return Problem("Entity set 'ApplicationDbContext.Projects'  is null.");
+            } 
+
+            return View();
+            
         }
 
         // GET: ProjectModels/Details/5
@@ -131,7 +146,7 @@ namespace Portfolio.Controllers
                 }
                
                    
-                //Save file to wwwroot/file
+                //Save new image to wwwroot/image
                 string wwwRootPath = _hostingEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(projectModel.Image.FileName);
                 string extension = Path.GetExtension(projectModel.Image.FileName);
@@ -196,18 +211,5 @@ namespace Portfolio.Controllers
             return (_context.Projects?.Any(e => e.ID == id)).GetValueOrDefault();
         }
 
-        [HttpPost, ActionName("Download")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Download(int id)
-        {
-            if (_context.Projects == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.Projects'  is null.");
-            }
-            var projectModel = await _context.Projects.FindAsync(id);
-
-            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "image", "IMG235110849.webp");
-            return File(System.IO.File.ReadAllBytes(filePath), "image/*", System.IO.Path.GetFileName(filePath));
-        }
     }
 }

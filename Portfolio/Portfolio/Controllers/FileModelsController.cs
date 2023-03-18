@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -14,8 +15,10 @@ using Portfolio.Data;
 using Portfolio.Models;
 
 namespace Portfolio.Controllers
+   
 {
-    public class FileModelsController : Controller
+ [Authorize]
+public class FileModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
@@ -76,7 +79,7 @@ namespace Portfolio.Controllers
                 string wwwRootPath = _hostingEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(fileModel.File.FileName);
                 string extension = Path.GetExtension(fileModel.File.FileName);
-                fileModel.FileName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                fileModel.FileName = fileName = fileName + extension;
                 string path = Path.Combine(wwwRootPath + "/file/", fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
@@ -111,7 +114,7 @@ namespace Portfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,FileName")] FileModel fileModel)
+        public async Task<IActionResult> Edit(int id, IFormFile File, [Bind("ID,Title,FileName,File")] FileModel fileModel)
         {
             if (id != fileModel.ID)
             {
@@ -120,23 +123,33 @@ namespace Portfolio.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                var file = await _context.Files.AsNoTracking().SingleOrDefaultAsync(i => i.ID == id);
+
+                if (file.FileName != null)
                 {
-                    _context.Update(fileModel);
-                    await _context.SaveChangesAsync();
+                    //delete file from wwwroot/file
+                    string filePath = Path.Combine(_hostingEnvironment.WebRootPath + "/file/", file.FileName);
+                    if (System.IO.File.Exists(filePath))
+                        System.IO.File.Delete(filePath);
                 }
-                catch (DbUpdateConcurrencyException)
+
+                //Save new image to wwwroot/image
+                string wwwRootPath = _hostingEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(fileModel.File.FileName);
+                string extension = Path.GetExtension(fileModel.File.FileName);
+                fileModel.FileName = fileName = fileName + extension;
+                string path = Path.Combine(wwwRootPath + "/file/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    if (!FileModelExists(fileModel.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    await fileModel.File.CopyToAsync(fileStream);
                 }
+                _context.Add(fileModel);
+
+
+                _context.Update(fileModel);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
             return View(fileModel);
         }
@@ -181,11 +194,6 @@ namespace Portfolio.Controllers
             
         }
 
-        private bool FileModelExists(int id)
-        {
-          return (_context.Files?.Any(e => e.ID == id)).GetValueOrDefault();
-        }
-
         //Allowed extentions
         public class AllowedExtensionsAttribute : ValidationAttribute
         {
@@ -217,17 +225,11 @@ namespace Portfolio.Controllers
             }
 
         }
-        [HttpGet, ActionName("Download")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Download(int id, string fileName)
+
+        private bool FileModelExists(int id)
         {
-
-            var fileModel = await _context.Files.FindAsync(id);
-
-            var filePath = Path.Combine(_hostingEnvironment.WebRootPath, "file" , fileModel.FileName);
-            return File(System.IO.File.ReadAllBytes(filePath), "image/*", System.IO.Path.GetFileName(filePath));
+          return (_context.Files?.Any(e => e.ID == id)).GetValueOrDefault();
         }
-
 
     }
 }

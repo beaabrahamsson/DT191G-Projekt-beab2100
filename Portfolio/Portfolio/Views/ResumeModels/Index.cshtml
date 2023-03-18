@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Portfolio.Models.ResumeModel>
+
+@{
+    ViewData["Title"] = "Admin - CV";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Admin - CV</h1>
+
+<p>
+    <a class="btn btn-primary my-2" asp-action="Create">Skapa ny</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YearEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOngoing)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearStart)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.YearEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOngoing)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Ändra</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Ta bort</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

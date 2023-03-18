@@ -1,13 +1,13 @@
 ﻿@model Portfolio.Models.FileModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Skapa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+<h1>Skapa</h1>
 
-<h4>FileModel</h4>
+<h4>Filer</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -20,18 +20,18 @@
             </div>
             <div class="form-group">
                 <label asp-for="File" class="control-label"></label>
-                <input asp-for="File" accept="application/pdf" />
+                <input asp-for="File" accept="application/pdf" class="form-control" />
                 <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Skapa" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Tillbaka till listan</a>
 </div>
 
 @section Scripts {

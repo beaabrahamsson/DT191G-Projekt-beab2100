@@ -20,6 +20,7 @@ namespace Portfolio.Models
         [DisplayName("GitHub länk")]
         [Required(ErrorMessage = "Vänligen ange en GitHub länk")]
         public string? GitHub { get; set; }
+        [DisplayName("Bild")]
         public string? ImageName { get; set; }
 
         [NotMapped]

@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "CV";
+    ViewData["Action"] = "Resume";
+}
+<!-- Breadcrumbs -->
+<partial name="_BreadcrumbsPartial" />
+<!-- Resume -->
+<section id="resume" class="resume">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6" data-aos="fade-up">                <div class="resume-item pb-0">
+                    <h4>Beatrice Abrahamsson</h4>
+                    <p>
+                        <em>
+                            Glad och social person som just nu
+                            läser till Webbutvecklare på
+                            Mittuniversitetet. Jag läser på distans
+                            samtidigt som jag arbetar 20% på
+                            Försvarsmakten.
+                            Jag har sedan tidigare en
+                            lärarexamen och är behörig i
+                            engelska och religion för åk 7-9 samt
+                            gymnasiet.
+                            Jag har även en kandidatexamen i
+                            engelska samt en kandidatexamen i
+                            religion.
+                        </em>
+                    </p>
+                    <ul>
+                        <li>Uppsala</li>
+                        <li>070 691 87 83</li>
+                        <li>beab2100@student.miun.se</li>
+                    </ul>
+                </div>
+
+                <h3 class="resume-title">Utbildning</h3>
+                <partial name="_EduPartial" />
+            </div>
+            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+                <h3 class="resume-title">Jobberfarenhet</h3>
+                <partial name="_ResumePartial" />
+            </div>
+        </div>
+
+    </div>
+</section>
