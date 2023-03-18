@@ -233,21 +233,27 @@ namespace Portfolio.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<int?>("Credits")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("School")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("YearEnd")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int?>("YearStart")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("ID");
@@ -316,21 +322,26 @@ namespace Portfolio.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("Company")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IsOngoing")
+                        .IsRequired()
                         .HasColumnType("bit");
 
                     b.Property<string>("JobTitle")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("YearEnd")
                         .HasColumnType("int");
 
                     b.Property<int?>("YearStart")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("ID");
