@@ -13,8 +13,7 @@
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "SENDGRID_KEY": "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"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
       "dotnetRunMessages": true,
       "applicationUrl": "https://localhost:7119;http://localhost:5062"
